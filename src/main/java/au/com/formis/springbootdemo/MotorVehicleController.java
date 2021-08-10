@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * annotation.</p>
  * <p>#TODO: Resolve field injection is not recommended warning.</p>
  * <p>
- *     @RestController is a convenient annotation that combines @Controller and @ResponseBody annotations.
+ *     &amp;RestController is a convenient annotation that combines @Controller and @ResponseBody annotations.
  * </p>
  * <p>
  * The List of entities returned by the MotorVehicleRepository are encapsulated in an

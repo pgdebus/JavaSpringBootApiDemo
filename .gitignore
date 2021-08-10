@@ -33,6 +33,7 @@ build/
 .vscode/
 
 ### Custom gitignore filters - PD 10/8/2021
+/data/
 .*.swp
 .*~
 *.md~
