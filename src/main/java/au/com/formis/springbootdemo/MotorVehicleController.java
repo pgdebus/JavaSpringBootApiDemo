@@ -69,6 +69,7 @@ public class MotorVehicleController {
      *
      * @param make The make REST query parameter.
      * @param request Request object for REST API query, used to fetch original URL.
+     * @param response Response object for API response, used to set http error code 404 for zero records.
      * @return ApiResponsePayload containing response JSON metadata and List of MotorVehicle entities.
      */
     // #Note : @GetMapping is a composed annotation shortcut for @RequestMapping(method=RequestMethod.Get).
@@ -76,8 +77,12 @@ public class MotorVehicleController {
     // @RequestMapping provides easy to read mapping for defined query parameters.
     // @GetMapping("/motorVehicles")
     @RequestMapping(value = "/motorVehicles", params = {"make"}, method = RequestMethod.GET)
-    public ApiResponsePayload<MotorVehicle> motorVehicleMake(@RequestParam(value = "make") String make, HttpServletRequest request) {
-        return new ApiResponsePayload<MotorVehicle>(publisher, payloadDescription, request.getRequestURL().append('?').append(request.getQueryString()).toString(), motorVehicleRepository.findMotorVehiclesByMake(make));
+    public ApiResponsePayload<MotorVehicle> motorVehicleMake(@RequestParam(value = "make") String make, HttpServletRequest request, HttpServletResponse response) {
+        var payLoad = new ApiResponsePayload<MotorVehicle>(publisher, payloadDescription, request.getRequestURL().append('?').append(request.getQueryString()).toString(), motorVehicleRepository.findMotorVehiclesByMake(make));
+        if (payLoad.getNumberOfRecords() == 0) {
+            response.setStatus((HttpServletResponse.SC_NOT_FOUND));
+        }
+        return payLoad;
     }
 
     /**
@@ -87,11 +92,16 @@ public class MotorVehicleController {
      * @param make The make REST query parameter.
      * @param model The model REST query parameter.
      * @param request Request object for REST API query, used to fetch original URL.
+     * @param response Response object for API response, used to set http error code 404 for zero records.
      * @return ApiResponsePayload containing response JSON metadata and List of MotorVehicle entities.
      */
     @RequestMapping(value = "/motorVehicles", params = {"make", "model"}, method = RequestMethod.GET)
-    public ApiResponsePayload<MotorVehicle> motorVehicleMakeAndModel(@RequestParam(value = "make") String make, @RequestParam(value = "model") String model, HttpServletRequest request) {
-        return new ApiResponsePayload<MotorVehicle>(publisher, payloadDescription, request.getRequestURL().append('?').append(request.getQueryString()).toString(), motorVehicleRepository.findMotorVehiclesByMakeAndModel(make, model));
+    public ApiResponsePayload<MotorVehicle> motorVehicleMakeAndModel(@RequestParam(value = "make") String make, @RequestParam(value = "model") String model, HttpServletRequest request, HttpServletResponse response) {
+        var payLoad = new ApiResponsePayload<MotorVehicle>(publisher, payloadDescription, request.getRequestURL().append('?').append(request.getQueryString()).toString(), motorVehicleRepository.findMotorVehiclesByMakeAndModel(make, model));
+        if (payLoad.getNumberOfRecords() == 0) {
+            response.setStatus((HttpServletResponse.SC_NOT_FOUND));
+        }
+        return payLoad;
     }
 
     /**
@@ -104,11 +114,16 @@ public class MotorVehicleController {
      * @param model The model REST query parameter.
      * @param generation The generation REST query parameter.
      * @param request Request object for REST API query, used to fetch original URL.
+     * @param response Response object for API response, used to set http error code 404 for zero records.
      * @return ApiResponsePayload containing response JSON metadata and List of MotorVehicle entities.
      */
     @RequestMapping(value = "/motorVehicles", params = {"make", "model", "generation"}, method = RequestMethod.GET)
-    public ApiResponsePayload<MotorVehicle> motorVehicleMakeAndModelAndGeneration(@RequestParam(value = "make") String make, @RequestParam(value = "model") String model, @RequestParam(value = "generation") String generation, HttpServletRequest request) {
-        return new ApiResponsePayload<MotorVehicle>(publisher, payloadDescription, request.getRequestURL().append('?').append(request.getQueryString()).toString(), motorVehicleRepository.findMotorVehiclesByMakeAndModelAndGenerationContains(make, model, generation));
+    public ApiResponsePayload<MotorVehicle> motorVehicleMakeAndModelAndGeneration(@RequestParam(value = "make") String make, @RequestParam(value = "model") String model, @RequestParam(value = "generation") String generation, HttpServletRequest request, HttpServletResponse response) {
+        var payLoad = new ApiResponsePayload<MotorVehicle>(publisher, payloadDescription, request.getRequestURL().append('?').append(request.getQueryString()).toString(), motorVehicleRepository.findMotorVehiclesByMakeAndModelAndGenerationContains(make, model, generation));
+        if (payLoad.getNumberOfRecords() == 0) {
+            response.setStatus((HttpServletResponse.SC_NOT_FOUND));
+        }
+        return payLoad;
     }
 
 
