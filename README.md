@@ -7,5 +7,5 @@ The RESTful API service has sample motor vehicle data in the H2 RDBMS
 captued in a single root table called MOTORVEHICLE.
 The sample data was sourced from https://www.teoalida.com/cardatabase/
 
-For details see the Javadoc https://pgdebus.github.io/JavaSpringBootDemo/index.html
+For more information see the Javadoc https://pgdebus.github.io/JavaSpringBootDemo/index.html
 
